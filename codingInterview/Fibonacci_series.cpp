@@ -4,12 +4,17 @@
  * @Email:  chenlin2844@hotmail.com
  * @Filename: Fibonacci_series.cpp
  * @Last modified by:   Lin Chen
- * @Last modified time: 2017-07-05T21:45:59+08:00
+ * @Last modified time: 2017-07-05T22:39:34+08:00
  */
 /*
 斐波那契系列问题
 题目1
 给定整数N,返回斐波那契数列的第N项
+题目2
+给定整数N，代表台阶数，一次可以跨2个或者1个台阶，返回有多少种走法。
+题目3
+假设农场中成熟的母牛每年只会生下1头小母牛，并且永远不会死。第一年农场有1只成熟的母牛，
+从第二年开始，母牛开始生小牛。每只小母牛3年后成熟又可以生小母牛。给定整数N，求出N年后牛的数量。
 */
 
 #include <iostream>
@@ -18,12 +23,12 @@ using namespace std;
 /*
 返回Fibonacci数列的第N个数字，N从1开始
 */
-int Fibonacci_k(int N){
+long long Fibonacci_k(int N){
   if(N<=2){
     return 1;
   }
-  int a = 1;
-  int b = 1;
+  long long a = 1;
+  long long b = 1;
   int i = 2;
   while(i!=N){
     b = a + b;
@@ -33,11 +38,34 @@ int Fibonacci_k(int N){
   return b;
 }
 
+long long  ClimbStairs(int N){
+  if(N == 1){
+    return 1;
+  }else if (N == 2){
+    return 2;
+  }else{
+    long long a = 1;
+    long long b = 2;
+    int i = 2;
+    while(i!=N){
+      b = a+b;
+      a = b-a;
+      i++;
+    }
+    return b;
+  }
+}
+/*
+返回N年后母牛的个数
+*/
+int count_cow(int N){
 
+}
 
 int main(){
   int N;
   while(cin >> N)
     cout << Fibonacci_k(N)<<endl;
+    //cout << ClimbStairs(N)<<endl;
   return 0;
 }
