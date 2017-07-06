@@ -4,7 +4,7 @@
  * @Email:  chenlin2844@hotmail.com
  * @Filename: Fibonacci_series.cpp
  * @Last modified by:   Lin Chen
- * @Last modified time: 2017-07-05T22:39:34+08:00
+ * @Last modified time: 2017-07-06T09:37:04+08:00
  */
 /*
 斐波那契系列问题
@@ -22,6 +22,7 @@ using namespace std;
 
 /*
 返回Fibonacci数列的第N个数字，N从1开始
+O(n)
 */
 long long Fibonacci_k(int N){
   if(N<=2){
@@ -37,6 +38,15 @@ long long Fibonacci_k(int N){
   }
   return b;
 }
+/*
+返回Fibonacci数列的第N个数字，N从1开始
+[F(n),F(n-1)] = [F(n-1),F(n-1)]*|matrix|
+O(log(n))
+*/
+long long Fibonacci_k_faster(int N){
+  
+}
+
 
 long long  ClimbStairs(int N){
   if(N == 1){
@@ -57,15 +67,33 @@ long long  ClimbStairs(int N){
 }
 /*
 返回N年后母牛的个数
+递推公式为f(n) = f(n-1) + f(n-3)
 */
-int count_cow(int N){
+long long count_cow(int N){
+  if(N <= 3){
+    return N;
+  }else{
+    long long count_three_years_ago = 1;
+    long long count_two_years_ago = 2;
+    long long count_last_year = 3;
+    long long count_this_year = 4;
+    int i = 3;
+    while(i++!=N){
+      count_this_year = count_three_years_ago + count_last_year;
+      count_three_years_ago = count_two_years_ago;
+      count_two_years_ago = count_last_year;
+      count_last_year = count_this_year;
+    }
+    return count_this_year;
+  }
 
 }
 
 int main(){
   int N;
   while(cin >> N)
-    cout << Fibonacci_k(N)<<endl;
+    cout << count_cow(N) << endl;
+    //cout << Fibonacci_k(N)<<endl;
     //cout << ClimbStairs(N)<<endl;
   return 0;
 }
